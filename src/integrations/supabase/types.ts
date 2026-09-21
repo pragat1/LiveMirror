@@ -14,7 +14,262 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      interview_answers: {
+        Row: {
+          analysis: Json | null
+          answer_score: number | null
+          created_at: string
+          duration_seconds: number | null
+          filler_word_count: number | null
+          filler_words: Json | null
+          id: string
+          question_id: string
+          session_id: string
+          speaking_rate: number | null
+          transcript: string
+          user_id: string
+        }
+        Insert: {
+          analysis?: Json | null
+          answer_score?: number | null
+          created_at?: string
+          duration_seconds?: number | null
+          filler_word_count?: number | null
+          filler_words?: Json | null
+          id?: string
+          question_id: string
+          session_id: string
+          speaking_rate?: number | null
+          transcript: string
+          user_id: string
+        }
+        Update: {
+          analysis?: Json | null
+          answer_score?: number | null
+          created_at?: string
+          duration_seconds?: number | null
+          filler_word_count?: number | null
+          filler_words?: Json | null
+          id?: string
+          question_id?: string
+          session_id?: string
+          speaking_rate?: number | null
+          transcript?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interview_answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "interview_questions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "interview_answers_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "interview_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      interview_questions: {
+        Row: {
+          category: string | null
+          created_at: string
+          id: string
+          question_order: number
+          question_text: string
+          session_id: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          question_order: number
+          question_text: string
+          session_id: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          question_order?: number
+          question_text?: string
+          session_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interview_questions_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "interview_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      interview_sessions: {
+        Row: {
+          created_at: string
+          difficulty: string
+          duration_seconds: number | null
+          ended_at: string | null
+          focus_areas: string[]
+          id: string
+          interview_type: string
+          overall_score: number | null
+          planned_duration_minutes: number
+          report: Json | null
+          role: string
+          started_at: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          difficulty: string
+          duration_seconds?: number | null
+          ended_at?: string | null
+          focus_areas?: string[]
+          id?: string
+          interview_type: string
+          overall_score?: number | null
+          planned_duration_minutes?: number
+          report?: Json | null
+          role: string
+          started_at?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          difficulty?: string
+          duration_seconds?: number | null
+          ended_at?: string | null
+          focus_areas?: string[]
+          id?: string
+          interview_type?: string
+          overall_score?: number | null
+          planned_duration_minutes?: number
+          report?: Json | null
+          role?: string
+          started_at?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          default_difficulty: string | null
+          email: string | null
+          experience_level: string | null
+          full_name: string | null
+          id: string
+          onboarding_completed: boolean
+          preferred_interview_type: string | null
+          preparing_for: string | null
+          target_company: string | null
+          target_role: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          default_difficulty?: string | null
+          email?: string | null
+          experience_level?: string | null
+          full_name?: string | null
+          id: string
+          onboarding_completed?: boolean
+          preferred_interview_type?: string | null
+          preparing_for?: string | null
+          target_company?: string | null
+          target_role?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          default_difficulty?: string | null
+          email?: string | null
+          experience_level?: string | null
+          full_name?: string | null
+          id?: string
+          onboarding_completed?: boolean
+          preferred_interview_type?: string | null
+          preparing_for?: string | null
+          target_company?: string | null
+          target_role?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      progress_metrics: {
+        Row: {
+          created_at: string
+          id: string
+          metric_name: string
+          metric_value: number
+          session_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          metric_name: string
+          metric_value: number
+          session_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          metric_name?: string
+          metric_value?: number
+          session_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "progress_metrics_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "interview_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resumes: {
+        Row: {
+          created_at: string
+          extracted_text: string | null
+          file_name: string | null
+          file_path: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          extracted_text?: string | null
+          file_name?: string | null
+          file_path?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          extracted_text?: string | null
+          file_name?: string | null
+          file_path?: string | null
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
