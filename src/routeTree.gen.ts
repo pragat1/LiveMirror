@@ -21,6 +21,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedPracticeIndexRouteImport } from './routes/_authenticated/practice.index'
 import { Route as AuthenticatedPracticeSetupRouteImport } from './routes/_authenticated/practice.setup'
+import { Route as AuthenticatedPracticeSessionIdRouteImport } from './routes/_authenticated/practice.session.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -83,6 +84,12 @@ const AuthenticatedPracticeSetupRoute =
     path: '/practice/setup',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedPracticeSessionIdRoute =
+  AuthenticatedPracticeSessionIdRouteImport.update({
+    id: '/practice/session/$id',
+    path: '/practice/session/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/practice/setup': typeof AuthenticatedPracticeSetupRoute
   '/practice/': typeof AuthenticatedPracticeIndexRoute
+  '/practice/session/$id': typeof AuthenticatedPracticeSessionIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -109,6 +117,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/practice/setup': typeof AuthenticatedPracticeSetupRoute
   '/practice': typeof AuthenticatedPracticeIndexRoute
+  '/practice/session/$id': typeof AuthenticatedPracticeSessionIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -124,6 +133,7 @@ export interface FileRoutesById {
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/practice/setup': typeof AuthenticatedPracticeSetupRoute
   '/_authenticated/practice/': typeof AuthenticatedPracticeIndexRoute
+  '/_authenticated/practice/session/$id': typeof AuthenticatedPracticeSessionIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/practice/setup'
     | '/practice/'
+    | '/practice/session/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/practice/setup'
     | '/practice'
+    | '/practice/session/$id'
   id:
     | '__root__'
     | '/'
@@ -166,6 +178,7 @@ export interface FileRouteTypes {
     | '/_authenticated/onboarding'
     | '/_authenticated/practice/setup'
     | '/_authenticated/practice/'
+    | '/_authenticated/practice/session/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPracticeSetupRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/practice/session/$id': {
+      id: '/_authenticated/practice/session/$id'
+      path: '/practice/session/$id'
+      fullPath: '/practice/session/$id'
+      preLoaderRoute: typeof AuthenticatedPracticeSessionIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -273,6 +293,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedPracticeSetupRoute: typeof AuthenticatedPracticeSetupRoute
   AuthenticatedPracticeIndexRoute: typeof AuthenticatedPracticeIndexRoute
+  AuthenticatedPracticeSessionIdRoute: typeof AuthenticatedPracticeSessionIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -280,6 +301,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedPracticeSetupRoute: AuthenticatedPracticeSetupRoute,
   AuthenticatedPracticeIndexRoute: AuthenticatedPracticeIndexRoute,
+  AuthenticatedPracticeSessionIdRoute: AuthenticatedPracticeSessionIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
