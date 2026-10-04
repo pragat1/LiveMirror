@@ -1,6 +1,6 @@
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ChevronDown, ChevronUp, Loader2, Sparkles, Wifi, WifiOff } from "lucide-react";
+import { ChevronDown, ChevronUp, Sparkles, Wifi, WifiOff } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -510,4 +510,3 @@ function Metric({ label, value }: { label: string; value: string }) {
   );
 }
 
-export { Loader2 };

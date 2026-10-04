@@ -19,8 +19,12 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedProgressRouteImport } from './routes/_authenticated/progress'
+import { Route as AuthenticatedHistoryIndexRouteImport } from './routes/_authenticated/history.index'
+import { Route as AuthenticatedHistoryIdRouteImport } from './routes/_authenticated/history.$id'
 import { Route as AuthenticatedPracticeIndexRouteImport } from './routes/_authenticated/practice.index'
 import { Route as AuthenticatedPracticeSetupRouteImport } from './routes/_authenticated/practice.setup'
+import { Route as AuthenticatedPracticeReportIdRouteImport } from './routes/_authenticated/practice.report.$id'
 import { Route as AuthenticatedPracticeSessionIdRouteImport } from './routes/_authenticated/practice.session.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -72,6 +76,22 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProgressRoute = AuthenticatedProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHistoryIndexRoute =
+  AuthenticatedHistoryIndexRouteImport.update({
+    id: '/history/',
+    path: '/history/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedHistoryIdRoute = AuthenticatedHistoryIdRouteImport.update({
+  id: '/history/$id',
+  path: '/history/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPracticeIndexRoute =
   AuthenticatedPracticeIndexRouteImport.update({
     id: '/practice/',
@@ -82,6 +102,12 @@ const AuthenticatedPracticeSetupRoute =
   AuthenticatedPracticeSetupRouteImport.update({
     id: '/practice/setup',
     path: '/practice/setup',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPracticeReportIdRoute =
+  AuthenticatedPracticeReportIdRouteImport.update({
+    id: '/practice/report/$id',
+    path: '/practice/report/$id',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedPracticeSessionIdRoute =
@@ -101,8 +127,12 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/progress': typeof AuthenticatedProgressRoute
+  '/history/$id': typeof AuthenticatedHistoryIdRoute
   '/practice/setup': typeof AuthenticatedPracticeSetupRoute
+  '/history/': typeof AuthenticatedHistoryIndexRoute
   '/practice/': typeof AuthenticatedPracticeIndexRoute
+  '/practice/report/$id': typeof AuthenticatedPracticeReportIdRoute
   '/practice/session/$id': typeof AuthenticatedPracticeSessionIdRoute
 }
 export interface FileRoutesByTo {
@@ -115,8 +145,12 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/progress': typeof AuthenticatedProgressRoute
+  '/history/$id': typeof AuthenticatedHistoryIdRoute
   '/practice/setup': typeof AuthenticatedPracticeSetupRoute
+  '/history': typeof AuthenticatedHistoryIndexRoute
   '/practice': typeof AuthenticatedPracticeIndexRoute
+  '/practice/report/$id': typeof AuthenticatedPracticeReportIdRoute
   '/practice/session/$id': typeof AuthenticatedPracticeSessionIdRoute
 }
 export interface FileRoutesById {
@@ -131,8 +165,12 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/progress': typeof AuthenticatedProgressRoute
+  '/_authenticated/history/$id': typeof AuthenticatedHistoryIdRoute
   '/_authenticated/practice/setup': typeof AuthenticatedPracticeSetupRoute
+  '/_authenticated/history/': typeof AuthenticatedHistoryIndexRoute
   '/_authenticated/practice/': typeof AuthenticatedPracticeIndexRoute
+  '/_authenticated/practice/report/$id': typeof AuthenticatedPracticeReportIdRoute
   '/_authenticated/practice/session/$id': typeof AuthenticatedPracticeSessionIdRoute
 }
 export interface FileRouteTypes {
@@ -147,8 +185,12 @@ export interface FileRouteTypes {
     | '/signup'
     | '/dashboard'
     | '/onboarding'
+    | '/progress'
+    | '/history/$id'
     | '/practice/setup'
+    | '/history/'
     | '/practice/'
+    | '/practice/report/$id'
     | '/practice/session/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -161,8 +203,12 @@ export interface FileRouteTypes {
     | '/signup'
     | '/dashboard'
     | '/onboarding'
+    | '/progress'
+    | '/history/$id'
     | '/practice/setup'
+    | '/history'
     | '/practice'
+    | '/practice/report/$id'
     | '/practice/session/$id'
   id:
     | '__root__'
@@ -176,8 +222,12 @@ export interface FileRouteTypes {
     | '/signup'
     | '/_authenticated/dashboard'
     | '/_authenticated/onboarding'
+    | '/_authenticated/progress'
+    | '/_authenticated/history/$id'
     | '/_authenticated/practice/setup'
+    | '/_authenticated/history/'
     | '/_authenticated/practice/'
+    | '/_authenticated/practice/report/$id'
     | '/_authenticated/practice/session/$id'
   fileRoutesById: FileRoutesById
 }
@@ -264,6 +314,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/progress': {
+      id: '/_authenticated/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof AuthenticatedProgressRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/history/': {
+      id: '/_authenticated/history/'
+      path: '/history'
+      fullPath: '/history/'
+      preLoaderRoute: typeof AuthenticatedHistoryIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/history/$id': {
+      id: '/_authenticated/history/$id'
+      path: '/history/$id'
+      fullPath: '/history/$id'
+      preLoaderRoute: typeof AuthenticatedHistoryIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/practice/': {
       id: '/_authenticated/practice/'
       path: '/practice'
@@ -276,6 +347,13 @@ declare module '@tanstack/react-router' {
       path: '/practice/setup'
       fullPath: '/practice/setup'
       preLoaderRoute: typeof AuthenticatedPracticeSetupRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/practice/report/$id': {
+      id: '/_authenticated/practice/report/$id'
+      path: '/practice/report/$id'
+      fullPath: '/practice/report/$id'
+      preLoaderRoute: typeof AuthenticatedPracticeReportIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/practice/session/$id': {
@@ -291,16 +369,24 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedProgressRoute: typeof AuthenticatedProgressRoute
+  AuthenticatedHistoryIdRoute: typeof AuthenticatedHistoryIdRoute
   AuthenticatedPracticeSetupRoute: typeof AuthenticatedPracticeSetupRoute
+  AuthenticatedHistoryIndexRoute: typeof AuthenticatedHistoryIndexRoute
   AuthenticatedPracticeIndexRoute: typeof AuthenticatedPracticeIndexRoute
+  AuthenticatedPracticeReportIdRoute: typeof AuthenticatedPracticeReportIdRoute
   AuthenticatedPracticeSessionIdRoute: typeof AuthenticatedPracticeSessionIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedProgressRoute: AuthenticatedProgressRoute,
+  AuthenticatedHistoryIdRoute: AuthenticatedHistoryIdRoute,
   AuthenticatedPracticeSetupRoute: AuthenticatedPracticeSetupRoute,
+  AuthenticatedHistoryIndexRoute: AuthenticatedHistoryIndexRoute,
   AuthenticatedPracticeIndexRoute: AuthenticatedPracticeIndexRoute,
+  AuthenticatedPracticeReportIdRoute: AuthenticatedPracticeReportIdRoute,
   AuthenticatedPracticeSessionIdRoute: AuthenticatedPracticeSessionIdRoute,
 }
 
