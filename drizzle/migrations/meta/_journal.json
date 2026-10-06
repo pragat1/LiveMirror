@@ -8,6 +8,13 @@
       "when": 1789988823598,
       "tag": "0000_live_mirror_core_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791291198928,
+      "tag": "0001_persist_ai_provider_access_status",
+      "breakpoints": true
     }
   ]
 }
