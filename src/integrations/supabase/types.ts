@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_gateway_access_state: {
+        Row: {
+          block_type: string | null
+          id: number
+          is_blocked: boolean
+          safe_message: string | null
+          updated_at: string
+        }
+        Insert: {
+          block_type?: string | null
+          id: number
+          is_blocked?: boolean
+          safe_message?: string | null
+          updated_at?: string
+        }
+        Update: {
+          block_type?: string | null
+          id?: number
+          is_blocked?: boolean
+          safe_message?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       interview_answers: {
         Row: {
           analysis: Json | null
