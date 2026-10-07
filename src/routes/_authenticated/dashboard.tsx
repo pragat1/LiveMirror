@@ -45,7 +45,7 @@ function Dashboard() {
   const streak = computeStreak(completed);
 
   return (
-    <AppShell title={profile?.full_name ? `Hi, ${profile.full_name.split(" ")[0]}` : undefined}>
+    <AppShell {...(profile?.full_name ? { title: `Hi, ${profile.full_name.split(" ")[0]}` } : {})}>
       <section className="surface bg-blush flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
         <div>
           <h1 className="text-2xl font-semibold sm:text-3xl">Ready for your next interview?</h1>

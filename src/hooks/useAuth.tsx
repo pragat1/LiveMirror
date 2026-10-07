@@ -68,7 +68,9 @@ export function useProfile() {
     queryKey: ["profile", user?.id],
     enabled: Boolean(user?.id),
     queryFn: async (): Promise<Profile | null> => {
-      const { data, error } = await supabase.from("profiles").select("*").eq("id", user!.id).maybeSingle();
+      const activeUserId = user?.id;
+      if (!activeUserId) return null;
+      const { data, error } = await supabase.from("profiles").select("*").eq("id", activeUserId).maybeSingle();
       if (error) throw error;
       return data;
     },

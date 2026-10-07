@@ -15,7 +15,7 @@ export const Route = createFileRoute("/faq")({
   component: Faq,
 });
 
-const FAQS = [
+const FAQS: ReadonlyArray<readonly [string, string]> = [
   ["What is Live Mirror?", "Live Mirror is an AI interview practice space. You answer interview questions out loud with your camera on, and get feedback on both what you said and how you said it."],
   ["How does AI interview practice work?", "You pick a role, interview type and difficulty. The AI generates questions for that context and asks them one at a time. Your spoken answer is transcribed in your browser, then analysed by AI for relevance, structure, specificity and delivery."],
   ["Does Live Mirror record video?", "No. Your camera is used only as a live mirror on your screen. Video is never uploaded or stored."],
