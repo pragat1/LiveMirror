@@ -25,7 +25,8 @@ export function ReportView({ id }: { id: string }) {
 
   if (q.isLoading) return <AppShell title="Report"><LoadingState label="Loading your report…" /></AppShell>;
   if (q.isError) return <AppShell title="Report"><ErrorState description="We couldn't load this report." onRetry={() => q.refetch()} /></AppShell>;
-  const { session, questions, answers } = q.data!;
+  if (!q.data) return <AppShell title="Report"><EmptyState icon={FileQuestion} title="Report not found" /></AppShell>;
+  const { session, questions, answers } = q.data;
   if (!session) return <AppShell title="Report"><EmptyState icon={FileQuestion} title="Report not found" /></AppShell>;
   const report = session.report as unknown as SessionReport | null;
   if (session.status !== "completed" || !report)
@@ -157,9 +158,11 @@ export function ReportView({ id }: { id: string }) {
                   <p>{an.summary}</p>
                   {an.star ? (
                     <div className="flex flex-wrap gap-2">
-                      {(["situation", "task", "action", "result"] as const).map((k) => (
-                        <span key={k} className={`rounded-full px-2.5 py-1 text-xs ${an.star![k] ? "bg-success/15" : "bg-warning/20"}`}>{k[0].toUpperCase() + k.slice(1)} {an.star![k] ? "✓" : "missing"}</span>
-                      ))}
+                      {(["situation", "task", "action", "result"] as const).map((k) => {
+                        const included = an.star?.[k] ?? false;
+                        const label = `${k[0]?.toUpperCase() ?? ""}${k.slice(1)}`;
+                        return <span key={k} className={`rounded-full px-2.5 py-1 text-xs ${included ? "bg-success/15" : "bg-warning/20"}`}>{label} {included ? "✓" : "missing"}</span>;
+                      })}
                       {an.star.note ? <p className="w-full text-xs text-muted-foreground">{an.star.note}</p> : null}
                     </div>
                   ) : null}

@@ -56,7 +56,7 @@ function Onboarding() {
       .from("profiles")
       .upsert({
         id: user.id,
-        email: user.email,
+        email: user.email ?? null,
         full_name: fullName.trim(),
         preparing_for: preparingFor,
         target_role: finalRole,
@@ -83,7 +83,7 @@ function Onboarding() {
             Step {step + 1} of {steps.length}
           </p>
           <Progress value={((step + 1) / steps.length) * 100} className="mt-2 h-1.5" />
-          <h1 className="mt-6 text-2xl font-semibold">{steps[step].title}</h1>
+          <h1 className="mt-6 text-2xl font-semibold">{steps[step]?.title}</h1>
 
           <div className="mt-6 space-y-5">
             {step === 0 ? (
@@ -131,7 +131,7 @@ function Onboarding() {
               Back
             </Button>
             {step < steps.length - 1 ? (
-              <Button disabled={!steps[step].valid} onClick={() => setStep((s) => s + 1)}>
+            <Button disabled={!steps[step]?.valid} onClick={() => setStep((s) => s + 1)}>
                 Continue
               </Button>
             ) : (

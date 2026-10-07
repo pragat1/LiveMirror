@@ -22,8 +22,8 @@ function ProgressPage() {
     return {
       date: format(new Date(s.ended_at ?? s.created_at), "d MMM"),
       overall: Number(s.overall_score),
-      answerQuality: r.categories.answerQuality ?? null,
-      communication: r.categories.communication ?? null,
+      answerQuality: r.categories["answerQuality"] ?? null,
+      communication: r.categories["communication"] ?? null,
       pace: r.averageSpeakingRate ? Math.round(r.averageSpeakingRate) : null,
       filler: r.totalFillerWords,
     };

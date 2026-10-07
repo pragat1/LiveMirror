@@ -57,6 +57,7 @@ export function useSpeechRecognition() {
       let interimText = "";
       for (let i = e.resultIndex; i < e.results.length; i += 1) {
         const result = e.results[i];
+        if (!result) continue;
         const text = result[0]?.transcript ?? "";
         if (result.isFinal) {
           setFinalTranscript((prev) => `${prev} ${text}`.trim());
