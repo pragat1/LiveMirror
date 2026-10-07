@@ -51,6 +51,18 @@ export async function fetchSessionDetail(id: string) {
   return { session: s.data, questions: q.data ?? [], answers: a.data ?? [] };
 }
 
+export async function fetchSessionDetail(id: string) {
+  const [s, q, a] = await Promise.all([
+    supabase.from("interview_sessions").select("*").eq("id", id).maybeSingle(),
+    supabase.from("interview_questions").select("*").eq("session_id", id).order("question_order"),
+    supabase.from("interview_answers").select("*").eq("session_id", id).order("created_at"),
+  ]);
+  if (s.error) throw s.error;
+  if (q.error) throw q.error;
+  if (a.error) throw a.error;
+  return { session: s.data, questions: q.data ?? [], answers: a.data ?? [] };
+}
+
 export function errorMessage(err: unknown): string {
   if (err instanceof Error) return err.message;
   return "Your connection was interrupted.";
